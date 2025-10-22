@@ -19,7 +19,7 @@ export default function ProfileScreen() {
           <View style={styles.avatarContainer}>
             <Image
               source={{
-                uri: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=300&q=60',
+                uri: 'https://media.licdn.com/dms/image/v2/D4D03AQF-hWNnXzTtZw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728987512239?e=1762992000&v=beta&t=U6YfWk3ocUr5k5OHf3dZuFmbkv1LNTnHc3rodoEATv8',
               }}
               style={styles.avatar}
               contentFit="cover"
@@ -29,7 +29,7 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           </View>
           <View style={styles.userInfo}>
-            <Text style={[styles.userName, { color: theme.text }]}>Zeynep Arslan</Text>
+            <Text style={[styles.userName, { color: theme.text }]}>Muhammet Yusuf Piroglu</Text>
             <View style={styles.userMetaRow}>
               <MaterialCommunityIcons name="map-marker" size={16} color={theme.icon} />
               <Text style={styles.userMeta}>Kadıköy, İstanbul</Text>
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 22,
     fontWeight: '700',
+    textAlign:'center'
   },
   userMetaRow: {
     flexDirection: 'row',
