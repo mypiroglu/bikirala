@@ -2,6 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 import {
   categories,
@@ -16,6 +17,7 @@ import { styles } from './explore.styles';
 export default function SearchScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
+  const router = useRouter();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -99,7 +101,10 @@ export default function SearchScreen() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoryRow}>
           {categories.map((category) => (
-            <TouchableOpacity key={category.id} style={[styles.categoryPill, { backgroundColor: category.color }]}>
+            <TouchableOpacity
+              key={category.id}
+              style={[styles.categoryPill, { backgroundColor: category.color }]}
+              onPress={() => router.push({ pathname: '/category/[id]', params: { id: category.id } })}>
               <MaterialCommunityIcons name={category.icon as any} size={22} color={theme.tint} />
               <View>
                 <Text style={styles.categoryName}>{category.label}</Text>
