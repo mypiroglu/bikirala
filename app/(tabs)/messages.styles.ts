@@ -180,4 +180,98 @@ export const styles = StyleSheet.create({
     color: '#0b1f3a',
     fontWeight: '600',
   },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 16,
+  },
+  modalCard: {
+    width: '100%',
+    borderRadius: 24,
+    padding: 18,
+    gap: 16,
+    shadowColor: '#101828',
+    shadowOpacity: 0.12,
+    shadowOffset: { width: 0, height: 12 },
+    shadowRadius: 24,
+    elevation: 6,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  modalUser: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  modalAvatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 16,
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  modalSubtitle: {
+    fontSize: 13,
+    color: '#6b7280',
+    marginTop: 4,
+  },
+  modalBody: {
+    gap: 12,
+  },
+  modalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 12,
+  },
+  modalLabel: {
+    fontSize: 13,
+    color: '#6b7280',
+  },
+  modalValue: {
+    fontSize: 14,
+    fontWeight: '700',
+    flex: 1,
+    textAlign: 'right',
+  },
+  modalListing: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 12,
+    borderRadius: 16,
+    backgroundColor: '#f5f7fb',
+  },
+  modalListingImage: {
+    width: 52,
+    height: 52,
+    borderRadius: 14,
+  },
+  modalListingTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  modalListingNote: {
+    fontSize: 12,
+    color: '#6b7280',
+    marginTop: 4,
+  },
+  modalButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 16,
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: '700',
+  },
 });
