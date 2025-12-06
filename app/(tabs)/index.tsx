@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import React from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 import {
   categories,
@@ -20,6 +21,7 @@ export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const [searchQuery, setSearchQuery] = React.useState('');
+  const router = useRouter();
 
   const allListings = React.useMemo(() => {
     const listingMap = new Map([
@@ -100,12 +102,16 @@ export default function HomeScreen() {
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.storyRow}>
           {stories.map((story) => (
-            <View key={story.id} style={styles.storyItem}>
+            <TouchableOpacity
+              key={story.id}
+              style={styles.storyItem}
+              activeOpacity={0.8}
+              onPress={() => router.push({ pathname: '/story/[id]', params: { id: story.id } })}>
               <View style={[styles.storyAvatarWrapper, story.isLive && styles.storyLive]}>
                 <Image source={{ uri: story.avatar }} style={styles.storyAvatar} />
               </View>
               <Text style={styles.storyLabel}>{story.seller}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
