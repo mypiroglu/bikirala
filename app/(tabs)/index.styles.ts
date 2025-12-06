@@ -264,44 +264,6 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     color: '#4a4f58',
   },
-  nearbyGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 16,
-  },
-  nearbyCard: {
-    width: '47%',
-    borderRadius: 18,
-    backgroundColor: '#fff',
-    overflow: 'hidden',
-    shadowColor: '#1f2933',
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 8 },
-    shadowRadius: 18,
-    elevation: 3,
-  },
-  nearbyImage: {
-    width: '100%',
-    height: 120,
-  },
-  nearbyInfo: {
-    padding: 12,
-    gap: 4,
-  },
-  nearbyTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#0b1f3a',
-  },
-  nearbyPrice: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#ff565f',
-  },
-  nearbyMeta: {
-    fontSize: 12,
-    color: '#6b7280',
-  },
   tipGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',

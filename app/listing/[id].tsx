@@ -5,7 +5,7 @@ import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { featuredListings, nearbyListings } from '@/constants/data';
+import { featuredListings } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -19,9 +19,7 @@ export default function ListingDetailsScreen() {
   const placeholderBackground = colorScheme === 'dark' ? '#101826' : '#eef2f7';
 
   const listing = React.useMemo(() => {
-    const allListings = new Map(
-      [...featuredListings, ...nearbyListings].map((item) => [item.id, item]),
-    );
+    const allListings = new Map(featuredListings.map((item) => [item.id, item]));
 
     return params.id ? allListings.get(params.id) : undefined;
   }, [params.id]);

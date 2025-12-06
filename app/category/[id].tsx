@@ -5,7 +5,7 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { categories, featuredListings, nearbyListings } from '@/constants/data';
+import { categories, featuredListings } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -19,11 +19,7 @@ export default function CategoryDetailsScreen() {
   const category = categories.find((item) => item.id === params.id);
 
   const listings = React.useMemo(() => {
-    const listingMap = new Map(
-      [...featuredListings, ...nearbyListings].map((listing) => [listing.id, listing]),
-    );
-
-    return Array.from(listingMap.values());
+    return featuredListings;
   }, []);
 
   return (

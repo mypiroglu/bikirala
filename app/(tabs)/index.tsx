@@ -8,7 +8,6 @@ import { useRouter } from 'expo-router';
 import {
   categories,
   featuredListings,
-  nearbyListings,
   proTips,
   stories,
 } from '@/constants/data';
@@ -24,12 +23,7 @@ export default function HomeScreen() {
   const router = useRouter();
 
   const allListings = React.useMemo(() => {
-    const listingMap = new Map([
-      ...featuredListings.map((listing) => [listing.id, listing]),
-      ...nearbyListings.map((listing) => [listing.id, listing]),
-    ]);
-
-    return Array.from(listingMap.values());
+    return featuredListings;
   }, []);
 
   const searchResults = React.useMemo(() => {
@@ -170,29 +164,6 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Yakınındakiler</Text>
-          <TouchableOpacity>
-            <Text style={[styles.actionLink, { color: theme.tint }]}>Haritada gör</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.nearbyGrid}>
-          {nearbyListings.map((listing) => (
-            <TouchableOpacity key={listing.id} style={styles.nearbyCard}>
-              <Image source={{ uri: listing.image }} style={styles.nearbyImage} contentFit="cover" />
-              <View style={styles.nearbyInfo}>
-                <Text style={styles.nearbyTitle} numberOfLines={2}>
-                  {listing.title}
-                </Text>
-                <Text style={styles.nearbyPrice}>{listing.price}</Text>
-                <Text style={styles.nearbyMeta}>
-                  {listing.location} · {listing.distance}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Bikirala İpuçları</Text>
