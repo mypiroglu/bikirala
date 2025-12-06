@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import React from 'react';
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { messageThreads } from '@/constants/data';
@@ -11,10 +11,28 @@ import { styles } from './messages.styles';
 
 const filters = ['Tümü', 'Okunmamış', 'Takipte', 'Arşiv'];
 
+type MessageThread = (typeof messageThreads)[number];
+
 export default function MessagesScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const [activeFilter, setActiveFilter] = React.useState(filters[0]);
+  const [threads, setThreads] = React.useState(messageThreads);
+  const [selectedThread, setSelectedThread] = React.useState<MessageThread | null>(null);
+  const [modalVisible, setModalVisible] = React.useState(false);
+
+  const handleOpenThread = (thread: MessageThread) => {
+    setThreads((prevThreads) =>
+      prevThreads.map((item) => (item.id === thread.id ? { ...item, unread: 0 } : item)),
+    );
+    setSelectedThread({ ...thread, unread: 0 });
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedThread(null);
+  };
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -62,12 +80,12 @@ export default function MessagesScreen() {
         </View>
 
         <FlatList
-          data={messageThreads}
+          data={threads}
           keyExtractor={(item) => item.id}
           scrollEnabled={false}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.threadCard}>
+            <TouchableOpacity style={styles.threadCard} onPress={() => handleOpenThread(item)}>
               <View style={styles.avatarWrapper}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} contentFit="cover" />
                 {item.unread && (
@@ -103,6 +121,66 @@ export default function MessagesScreen() {
             </TouchableOpacity>
           )}
         />
+
+        <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={closeModal}>
+          <View style={styles.modalOverlay}>
+            <View style={[styles.modalCard, { backgroundColor: theme.background }]}>
+              <View style={styles.modalHeader}>
+                <View style={styles.modalUser}>
+                  {selectedThread && (
+                    <Image
+                      source={{ uri: selectedThread.avatar }}
+                      style={styles.modalAvatar}
+                      contentFit="cover"
+                    />
+                  )}
+                  <View>
+                    <Text style={[styles.modalTitle, { color: theme.text }]}>Yeni Bildirim</Text>
+                    <Text style={styles.modalSubtitle}>Mesaj okundu olarak işaretlendi</Text>
+                  </View>
+                </View>
+                <TouchableOpacity onPress={closeModal}>
+                  <MaterialCommunityIcons name="close" size={24} color={theme.icon} />
+                </TouchableOpacity>
+              </View>
+
+              {selectedThread && (
+                <View style={styles.modalBody}>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalLabel}>Gönderen</Text>
+                    <Text style={[styles.modalValue, { color: theme.text }]}>{selectedThread.name}</Text>
+                  </View>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalLabel}>Mesaj</Text>
+                    <Text style={[styles.modalValue, { color: theme.text }]}>{selectedThread.lastMessage}</Text>
+                  </View>
+                  <View style={styles.modalRow}>
+                    <Text style={styles.modalLabel}>Zaman</Text>
+                    <Text style={[styles.modalValue, { color: theme.text }]}>{selectedThread.timestamp}</Text>
+                  </View>
+
+                  <View style={styles.modalListing}>
+                    <Image
+                      source={{ uri: selectedThread.listingImage }}
+                      style={styles.modalListingImage}
+                      contentFit="cover"
+                    />
+                    <View style={{ flex: 1 }}>
+                      <Text style={[styles.modalListingTitle, { color: theme.text }]}>
+                        {selectedThread.listingTitle}
+                      </Text>
+                      <Text style={styles.modalListingNote}>İlgili ilan detayları</Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+
+              <TouchableOpacity style={[styles.modalButton, { backgroundColor: theme.tint }]} onPress={closeModal}>
+                <Text style={styles.modalButtonText}>Anladım</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
