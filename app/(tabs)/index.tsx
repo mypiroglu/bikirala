@@ -141,7 +141,11 @@ export default function HomeScreen() {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.featuredRow}>
           {featuredListings.map((listing) => (
-            <View key={listing.id} style={styles.featuredCard}>
+            <TouchableOpacity
+              key={listing.id}
+              activeOpacity={0.85}
+              style={styles.featuredCard}
+              onPress={() => router.push({ pathname: '/listing/[id]', params: { id: listing.id } })}>
               <View style={styles.featuredImageWrapper}>
                 <Image source={{ uri: listing.image }} style={styles.featuredImage} contentFit="cover" />
                 {listing.badge && (
@@ -163,7 +167,7 @@ export default function HomeScreen() {
                   {listing.location} · {listing.distance}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
