@@ -117,7 +117,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Kategoriler</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/categories')}>
             <Text style={[styles.actionLink, { color: theme.tint }]}>Tümünü gör</Text>
           </TouchableOpacity>
         </View>
