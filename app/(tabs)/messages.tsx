@@ -88,7 +88,7 @@ export default function MessagesScreen() {
             <TouchableOpacity style={styles.threadCard} onPress={() => handleOpenThread(item)}>
               <View style={styles.avatarWrapper}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} contentFit="cover" />
-                {item.unread && (
+                {Boolean(item.unread) && (
                   <View style={styles.unreadBadge}>
                     <Text style={styles.unreadLabel}>{item.unread}</Text>
                   </View>
