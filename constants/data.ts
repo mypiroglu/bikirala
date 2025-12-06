@@ -72,45 +72,6 @@ export const featuredListings: Listing[] = [
   },
 ];
 
-export const nearbyListings: Listing[] = [
-  {
-    id: '4',
-    title: 'Nintendo Switch OLED',
-    price: '10.750 TL',
-    location: 'Ataşehir',
-    distance: '2 km',
-    image:
-      'https://images.unsplash.com/photo-1598550476439-6847785fcea4?auto=format&fit=crop&w=600&q=60',
-  },
-  {
-    id: '5',
-    title: 'Sıfır Ayarında Drone',
-    price: '14.300 TL',
-    location: 'Maltepe',
-    distance: '5 km',
-    image:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=60',
-  },
-  {
-    id: '6',
-    title: 'El Yapımı Masif Masa',
-    price: '4.600 TL',
-    location: 'Kadıköy',
-    distance: '1.1 km',
-    image:
-      'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=600&q=60',
-  },
-  {
-    id: '7',
-    title: 'Profesyonel Kahve Makinesi',
-    price: '3.950 TL',
-    location: 'Ümraniye',
-    distance: '3.8 km',
-    image:
-      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=60',
-  },
-];
-
 export const stories: Story[] = [
   {
     id: '1',
