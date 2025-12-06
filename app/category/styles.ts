@@ -57,6 +57,21 @@ export const styles = StyleSheet.create({
   listingGrid: {
     gap: 12,
   },
+  emptyState: {
+    padding: 16,
+    alignItems: 'center',
+    borderRadius: 14,
+    borderWidth: 1,
+    gap: 8,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
   listingCard: {
     borderRadius: 14,
     overflow: 'hidden',

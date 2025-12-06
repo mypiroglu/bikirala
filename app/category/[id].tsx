@@ -19,8 +19,12 @@ export default function CategoryDetailsScreen() {
   const category = categories.find((item) => item.id === params.id);
 
   const listings = React.useMemo(() => {
-    return featuredListings;
-  }, []);
+    if (!category) {
+      return [];
+    }
+
+    return featuredListings.filter((listing) => listing.categoryId === category.id);
+  }, [category]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -65,28 +69,46 @@ export default function CategoryDetailsScreen() {
         </View>
 
         <View style={styles.listingGrid}>
-          {listings.map((listing) => (
+          {listings.length === 0 ? (
             <View
-              key={listing.id}
               style={[
-                styles.listingCard,
-                {
-                  backgroundColor: cardBackground,
-                  borderColor: colorScheme === 'dark' ? '#1f2a3b' : 'rgba(11, 31, 58, 0.08)',
-                },
+                styles.emptyState,
+                { backgroundColor: cardBackground, borderColor: theme.tabIconDefault },
               ]}>
-              <Image source={{ uri: listing.image }} style={styles.listingImage} contentFit="cover" />
-              <View style={styles.listingInfo}>
-                <Text style={[styles.listingTitle, { color: theme.text }]} numberOfLines={2}>
-                  {listing.title}
-                </Text>
-                <Text style={[styles.listingPrice, { color: theme.tint }]}>{listing.price}</Text>
-                <Text style={[styles.listingMeta, { color: theme.tabIconDefault }]}>
-                  {listing.location} · {listing.distance}
-                </Text>
-              </View>
+              <MaterialCommunityIcons
+                name="clipboard-text-search"
+                size={24}
+                color={theme.tabIconDefault}
+              />
+              <Text style={[styles.emptyTitle, { color: theme.text }]}>İlan bulunamadı</Text>
+              <Text style={[styles.emptySubtitle, { color: theme.tabIconDefault }]}>
+                Bu kategoride henüz bir ilan yok. Yakında yeni ilanlar eklenecek.
+              </Text>
             </View>
-          ))}
+          ) : (
+            listings.map((listing) => (
+              <View
+                key={listing.id}
+                style={[
+                  styles.listingCard,
+                  {
+                    backgroundColor: cardBackground,
+                    borderColor: colorScheme === 'dark' ? '#1f2a3b' : 'rgba(11, 31, 58, 0.08)',
+                  },
+                ]}>
+                <Image source={{ uri: listing.image }} style={styles.listingImage} contentFit="cover" />
+                <View style={styles.listingInfo}>
+                  <Text style={[styles.listingTitle, { color: theme.text }]} numberOfLines={2}>
+                    {listing.title}
+                  </Text>
+                  <Text style={[styles.listingPrice, { color: theme.tint }]}>{listing.price}</Text>
+                  <Text style={[styles.listingMeta, { color: theme.tabIconDefault }]}>
+                    {listing.location} · {listing.distance}
+                  </Text>
+                </View>
+              </View>
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
