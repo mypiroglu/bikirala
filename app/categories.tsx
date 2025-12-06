@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,6 +14,7 @@ export default function CategoriesScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const cardBackground = colorScheme === 'dark' ? '#121723' : '#fff';
+  const router = useRouter();
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -45,7 +46,8 @@ export default function CategoriesScreen() {
             <TouchableOpacity
               key={category.id}
               style={[styles.categoryCard, { backgroundColor: category.color }]}
-              activeOpacity={0.9}>
+              activeOpacity={0.9}
+              onPress={() => router.push({ pathname: '/category/[id]', params: { id: category.id } })}>
               <View style={styles.categoryHeader}>
                 <MaterialCommunityIcons name={category.icon as any} size={26} color={theme.tint} />
               </View>

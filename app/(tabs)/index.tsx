@@ -123,7 +123,10 @@ export default function HomeScreen() {
         </View>
         <View style={styles.categoryGrid}>
           {categories.map((category) => (
-            <TouchableOpacity key={category.id} style={[styles.categoryCard, { backgroundColor: category.color }]}>
+            <TouchableOpacity
+              key={category.id}
+              style={[styles.categoryCard, { backgroundColor: category.color }]}
+              onPress={() => router.push({ pathname: '/category/[id]', params: { id: category.id } })}>
               <MaterialCommunityIcons name={category.icon as any} size={28} color={theme.tint} />
               <Text style={styles.categoryLabel}>{category.label}</Text>
             </TouchableOpacity>
