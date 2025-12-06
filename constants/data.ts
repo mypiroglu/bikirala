@@ -12,6 +12,7 @@ export type Listing = {
   location: string;
   distance: string;
   image: string;
+  categoryId: string;
   badge?: string;
   isBoosted?: boolean;
 };
@@ -48,6 +49,7 @@ export const featuredListings: Listing[] = [
     distance: '1.2 km',
     image:
       'https://images.unsplash.com/photo-1661961110671-44ecca942d87?auto=format&fit=crop&w=800&q=60',
+    categoryId: '1',
     badge: 'Günün Fırsatı',
     isBoosted: true,
   },
@@ -59,6 +61,7 @@ export const featuredListings: Listing[] = [
     distance: '3.4 km',
     image:
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60',
+    categoryId: '3',
   },
   {
     id: '3',
@@ -68,7 +71,39 @@ export const featuredListings: Listing[] = [
     distance: '4.1 km',
     image:
       'https://images.unsplash.com/photo-1525104254931-6afc3fd675c5?auto=format&fit=crop&w=800&q=60',
+    categoryId: '2',
     badge: 'Kargo Bedava',
+  },
+  {
+    id: '4',
+    title: 'Vintage Deri Omuz Çantası',
+    price: '1.250 TL',
+    location: 'Nişantaşı',
+    distance: '2.1 km',
+    image:
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=60',
+    categoryId: '4',
+  },
+  {
+    id: '5',
+    title: 'Fujifilm X-T30 Kamera Gövdesi',
+    price: '18.400 TL',
+    location: 'Bakırköy',
+    distance: '5.2 km',
+    image:
+      'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=60',
+    categoryId: '5',
+    badge: 'Temiz Kullanım',
+  },
+  {
+    id: '6',
+    title: 'Mama Sandalyesi (Katlanabilir)',
+    price: '950 TL',
+    location: 'Ataşehir',
+    distance: '3.9 km',
+    image:
+      'https://images.unsplash.com/photo-1509474520651-53cf6a80543d?auto=format&fit=crop&w=800&q=60',
+    categoryId: '6',
   },
 ];
 
