@@ -19,6 +19,23 @@ import { styles } from './index.styles';
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const allListings = React.useMemo(() => {
+    const listingMap = new Map([
+      ...featuredListings.map((listing) => [listing.id, listing]),
+      ...nearbyListings.map((listing) => [listing.id, listing]),
+    ]);
+
+    return Array.from(listingMap.values());
+  }, []);
+
+  const searchResults = React.useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return [];
+
+    return allListings.filter((listing) => listing.title.toLowerCase().includes(query));
+  }, [allListings, searchQuery]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -39,11 +56,47 @@ export default function HomeScreen() {
             placeholder="Mahallende ne arıyorsun?"
             placeholderTextColor="#8b94a1"
             style={styles.searchInput}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
           />
           <TouchableOpacity style={styles.filterButton}>
             <MaterialCommunityIcons name="tune-variant" size={20} color={theme.background} />
           </TouchableOpacity>
         </View>
+
+        {searchQuery.trim().length > 0 && (
+          <>
+            <View style={styles.sectionHeader}>
+              <Text style={[styles.sectionTitle, { color: theme.text }]}>Arama Sonuçları</Text>
+              <Text style={[styles.actionLink, { color: theme.tint }]}>{searchResults.length} sonuç</Text>
+            </View>
+
+            {searchResults.length === 0 ? (
+              <View style={[styles.emptyStateCard, { backgroundColor: theme.background }]}>
+                <MaterialCommunityIcons name="magnify" size={20} color={theme.tabIconDefault} />
+                <Text style={[styles.emptyStateText, { color: theme.text }]}>Sonuç bulunamadı</Text>
+                <Text style={[styles.emptyStateHint, { color: theme.tabIconDefault }]}>Aramanızı farklı anahtar kelimelerle deneyin.</Text>
+              </View>
+            ) : (
+              <View style={styles.searchResultsGrid}>
+                {searchResults.map((listing) => (
+                  <View key={listing.id} style={styles.searchResultCard}>
+                    <Image source={{ uri: listing.image }} style={styles.searchResultImage} contentFit="cover" />
+                    <View style={styles.searchResultInfo}>
+                      <Text style={styles.searchResultTitle} numberOfLines={2}>
+                        {listing.title}
+                      </Text>
+                      <Text style={styles.searchResultPrice}>{listing.price}</Text>
+                      <Text style={styles.searchResultMeta}>
+                        {listing.location} · {listing.distance}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
+          </>
+        )}
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.storyRow}>
           {stories.map((story) => (
