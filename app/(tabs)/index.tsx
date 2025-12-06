@@ -135,7 +135,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Öne Çıkan İlanlar</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/explore')}>
             <Text style={[styles.actionLink, { color: theme.tint }]}>Hepsini keşfet</Text>
           </TouchableOpacity>
         </View>
