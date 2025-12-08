@@ -72,7 +72,7 @@ export default function ListingDetailsScreen() {
           <View style={styles.metaRow}>
             <MaterialCommunityIcons name="map-marker" size={18} color={theme.tabIconDefault} />
             <Text style={[styles.metaText, { color: theme.tabIconDefault }]}>
-              {listing ? `${listing.location} · ${listing.distance}` : 'Konum bilgisi bulunamadı'}
+              {listing ? listing.location : 'Konum bilgisi bulunamadı'}
             </Text>
           </View>
         </View>
