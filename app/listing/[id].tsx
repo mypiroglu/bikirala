@@ -1,6 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { styles } from './styles';
 
 export default function ListingDetailsScreen() {
+  const router = useRouter();
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const params = useLocalSearchParams<{ id?: string }>();
@@ -132,7 +133,10 @@ export default function ListingDetailsScreen() {
               </View>
             </View>
 
-            <TouchableOpacity style={[styles.messageButton, { borderColor: theme.tint }]} activeOpacity={0.88}>
+            <TouchableOpacity
+              style={[styles.messageButton, { borderColor: theme.tint }]}
+              activeOpacity={0.88}
+              onPress={() => router.push('/(tabs)/messages')}>
               <MaterialCommunityIcons name="message-text" size={18} color={theme.tint} />
               <Text style={[styles.messageButtonLabel, { color: theme.tint }]}>Satıcıya mesaj gönder</Text>
             </TouchableOpacity>
