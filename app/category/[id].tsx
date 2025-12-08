@@ -1,8 +1,8 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { categories, featuredListings } from '@/constants/data';
@@ -16,6 +16,7 @@ export default function CategoryDetailsScreen() {
   const theme = Colors[colorScheme ?? 'light'];
   const cardBackground = colorScheme === 'dark' ? '#121723' : '#fff';
   const params = useLocalSearchParams<{ id?: string }>();
+  const router = useRouter();
   const category = categories.find((item) => item.id === params.id);
 
   const listings = React.useMemo(() => {
@@ -87,7 +88,7 @@ export default function CategoryDetailsScreen() {
             </View>
           ) : (
             listings.map((listing) => (
-              <View
+              <TouchableOpacity
                 key={listing.id}
                 style={[
                   styles.listingCard,
@@ -95,7 +96,9 @@ export default function CategoryDetailsScreen() {
                     backgroundColor: cardBackground,
                     borderColor: colorScheme === 'dark' ? '#1f2a3b' : 'rgba(11, 31, 58, 0.08)',
                   },
-                ]}>
+                ]}
+                activeOpacity={0.88}
+                onPress={() => router.push({ pathname: '/listing/[id]', params: { id: listing.id } })}>
                 <Image source={{ uri: listing.image }} style={styles.listingImage} contentFit="cover" />
                 <View style={styles.listingInfo}>
                   <Text style={[styles.listingTitle, { color: theme.text }]} numberOfLines={2}>
@@ -106,7 +109,7 @@ export default function CategoryDetailsScreen() {
                     {listing.location} · {listing.distance}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))
           )}
         </View>

@@ -94,6 +94,51 @@ export default function ListingDetailsScreen() {
           </View>
         </View>
 
+        {listing && (
+          <View
+            style={[
+              styles.sellerCard,
+              {
+                backgroundColor: cardBackground,
+                borderColor: colorScheme === 'dark' ? '#1f2a3b' : 'rgba(11, 31, 58, 0.08)',
+              },
+            ]}>
+            <View style={styles.sellerHeader}>
+              <Image source={{ uri: listing.sellerAvatar }} style={styles.sellerAvatar} contentFit="cover" />
+              <View style={{ flex: 1 }}>
+                <Text style={[styles.sellerName, { color: theme.text }]}>{listing.sellerName}</Text>
+                <Text style={[styles.sellerMetaText, { color: theme.tabIconDefault }]}> 
+                  {listing.sellerResponseTime ?? 'Hızlı yanıt verir'}
+                </Text>
+              </View>
+              <View style={styles.sellerStats}>
+                <MaterialCommunityIcons name="star" size={16} color="#f59e0b" />
+                <Text style={[styles.sellerStatText, { color: theme.text }]}>
+                  {listing.sellerRating ? `${listing.sellerRating.toFixed(1)} / 5` : 'Yeni satıcı'}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.sellerMetaRow}>
+              <View style={styles.sellerMetaItem}>
+                <MaterialCommunityIcons name="shopping-outline" size={16} color={theme.tint} />
+                <Text style={[styles.sellerMetaText, { color: theme.text }]}>
+                  {listing.sellerSales ? `${listing.sellerSales}+ satış` : 'İlk ilanı'}
+                </Text>
+              </View>
+              <View style={styles.sellerMetaItem}>
+                <MaterialCommunityIcons name="shield-check" size={16} color={theme.tint} />
+                <Text style={[styles.sellerMetaText, { color: theme.text }]}>Kimliği doğrulandı</Text>
+              </View>
+            </View>
+
+            <TouchableOpacity style={[styles.messageButton, { borderColor: theme.tint }]} activeOpacity={0.88}>
+              <MaterialCommunityIcons name="message-text" size={18} color={theme.tint} />
+              <Text style={[styles.messageButtonLabel, { color: theme.tint }]}>Satıcıya mesaj gönder</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
         <TouchableOpacity style={[styles.primaryButton, { backgroundColor: theme.tint }]}>
           <Text style={styles.primaryButtonLabel}>Hemen satın al</Text>
         </TouchableOpacity>
