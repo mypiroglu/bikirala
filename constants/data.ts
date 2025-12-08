@@ -15,6 +15,11 @@ export type Listing = {
   categoryId: string;
   badge?: string;
   isBoosted?: boolean;
+  sellerName: string;
+  sellerAvatar: string;
+  sellerRating?: number;
+  sellerSales?: number;
+  sellerResponseTime?: string;
 };
 
 export type Story = {
@@ -52,6 +57,12 @@ export const featuredListings: Listing[] = [
     categoryId: '1',
     badge: 'Günün Fırsatı',
     isBoosted: true,
+    sellerName: 'Zeynep Yılmaz',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 4.9,
+    sellerSales: 124,
+    sellerResponseTime: 'Genellikle 10 dk içinde yanıt verir',
   },
   {
     id: '2',
@@ -62,6 +73,12 @@ export const featuredListings: Listing[] = [
     image:
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60',
     categoryId: '3',
+    sellerName: 'Mert Karaca',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 4.7,
+    sellerSales: 86,
+    sellerResponseTime: '1 saat içinde yanıt verir',
   },
   {
     id: '3',
@@ -73,6 +90,12 @@ export const featuredListings: Listing[] = [
       'https://images.unsplash.com/photo-1525104254931-6afc3fd675c5?auto=format&fit=crop&w=800&q=60',
     categoryId: '2',
     badge: 'Kargo Bedava',
+    sellerName: 'Ahmet Demir',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 4.8,
+    sellerSales: 203,
+    sellerResponseTime: 'Hızlı yanıt verir',
   },
   {
     id: '4',
@@ -83,6 +106,12 @@ export const featuredListings: Listing[] = [
     image:
       'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=60',
     categoryId: '4',
+    sellerName: 'Selin Kaya',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 5,
+    sellerSales: 57,
+    sellerResponseTime: 'Aynı gün dönüş yapar',
   },
   {
     id: '5',
@@ -94,6 +123,12 @@ export const featuredListings: Listing[] = [
       'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=60',
     categoryId: '5',
     badge: 'Temiz Kullanım',
+    sellerName: 'Elif Tufan',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 4.6,
+    sellerSales: 142,
+    sellerResponseTime: 'Ortalama 30 dk içinde yanıt verir',
   },
   {
     id: '6',
@@ -104,6 +139,12 @@ export const featuredListings: Listing[] = [
     image:
       'https://images.unsplash.com/photo-1509474520651-53cf6a80543d?auto=format&fit=crop&w=800&q=60',
     categoryId: '6',
+    sellerName: 'Deniz Erol',
+    sellerAvatar:
+      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=200&q=60',
+    sellerRating: 4.4,
+    sellerSales: 33,
+    sellerResponseTime: 'Aynı gün içinde dönüş yapar',
   },
 ];
 
