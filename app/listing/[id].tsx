@@ -140,7 +140,7 @@ export default function ListingDetailsScreen() {
         )}
 
         <TouchableOpacity style={[styles.primaryButton, { backgroundColor: theme.tint }]}>
-          <Text style={styles.primaryButtonLabel}>Hemen satın al</Text>
+          <Text style={styles.primaryButtonLabel}>Hemen kirala</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.secondaryButton, { borderColor: theme.tabIconDefault }]}>
           <Text style={[styles.secondaryButtonLabel, { color: theme.text }]}>Favorilere ekle</Text>
