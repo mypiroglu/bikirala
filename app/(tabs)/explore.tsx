@@ -88,9 +88,6 @@ export default function SearchScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Trend olan aramalar</Text>
-          <TouchableOpacity>
-            <Text style={[styles.sectionLink, { color: theme.tint }]}>Tümü</Text>
-          </TouchableOpacity>
         </View>
         <FlatList
           data={trendingSearches}
