@@ -211,11 +211,6 @@ export const trendingSearches = [
   'robot süpürge',
 ];
 
-export const savedSearches = [
-  'Kadıköy ikinci el gitar',
-  'Sıfır sneaker 43 numara',
-];
-
 export const messageThreads = [
   {
     id: '1',

@@ -4,12 +4,7 @@ import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
-import {
-  categories,
-  featuredListings,
-  savedSearches,
-  trendingSearches,
-} from '@/constants/data';
+import { categories, featuredListings, trendingSearches } from '@/constants/data';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { styles } from './explore.styles';
@@ -34,7 +29,7 @@ export default function SearchScreen() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <Text style={[styles.title, { color: theme.text }]}>Aradığın her şey tek uygulamada</Text>
         <Text style={styles.subtitle}>
-          Kaydedilmiş aramalarını kontrol et, ilham veren sonuçlarla keşfetmeye devam et.
+          Trend aramaları incele, ilham veren sonuçlarla keşfetmeye devam et.
         </Text>
 
         <View style={styles.searchBar}>
@@ -90,20 +85,6 @@ export default function SearchScreen() {
             )}
           </>
         )}
-
-        <Text style={[styles.sectionTitle, { color: theme.text }]}>Kaydedilen aramalar</Text>
-        <View style={styles.savedContainer}>
-          {savedSearches.map((item) => (
-            <TouchableOpacity key={item} style={styles.savedChip}>
-              <MaterialCommunityIcons name="bookmark-outline" size={16} color="#ff565f" />
-              <Text style={styles.savedText}>{item}</Text>
-            </TouchableOpacity>
-          ))}
-          <TouchableOpacity style={styles.savedChipGhost}>
-            <MaterialCommunityIcons name="plus" size={16} color={theme.tint} />
-            <Text style={[styles.savedText, { color: theme.tint }]}>Yeni ekle</Text>
-          </TouchableOpacity>
-        </View>
 
         <View style={styles.sectionHeader}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Trend olan aramalar</Text>
