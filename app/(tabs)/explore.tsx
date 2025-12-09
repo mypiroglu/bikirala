@@ -78,23 +78,6 @@ export default function SearchScreen() {
           )}
         />
 
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Popüler filtreler</Text>
-          <TouchableOpacity>
-            <Text style={[styles.sectionLink, { color: theme.tint }]}>Filtreleri yönet</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.filterRow}>
-          {['Sadece fotoğraflı', '7 gün içinde', 'Ücretsiz teslimat', 'Sertifikalı satıcı'].map(
-            (label) => (
-              <TouchableOpacity key={label} style={styles.filterChip}>
-                <MaterialCommunityIcons name="checkbox-blank-circle" size={10} color={theme.tint} />
-                <Text style={styles.filterLabel}>{label}</Text>
-              </TouchableOpacity>
-            ),
-          )}
-        </View>
-
         <Text style={[styles.sectionTitle, { color: theme.text }]}>Kategoriye göre keşfet</Text>
         <ScrollView
           horizontal
