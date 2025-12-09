@@ -106,7 +106,7 @@ export default function CategoryDetailsScreen() {
                   </Text>
                   <Text style={[styles.listingPrice, { color: theme.tint }]}>{listing.price}</Text>
                   <Text style={[styles.listingMeta, { color: theme.tabIconDefault }]}>
-                    {listing.location} · {listing.distance}
+                    {listing.location}
                   </Text>
                 </View>
               </TouchableOpacity>
