@@ -190,6 +190,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
   },
+  favoriteButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   secondaryButtonLabel: {
     fontWeight: '700',
     fontSize: 15,
