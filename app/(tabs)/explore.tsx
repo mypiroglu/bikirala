@@ -115,22 +115,6 @@ export default function SearchScreen() {
           ))}
         </ScrollView>
 
-        <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Aramanı hızlandır</Text>
-        </View>
-        <View style={styles.assistantCard}>
-          <MaterialCommunityIcons name="robot-love" size={36} color={theme.tint} />
-          <View style={{ flex: 1 }}>
-            <Text style={styles.assistantTitle}>Yapay zekâ asistanı</Text>
-            <Text style={styles.assistantDescription}>
-              Bikirala Asistan aradığın ürünü saniyeler içinde bulur, fiyat uyarıları gönderir.
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.assistantButton}>
-            <Text style={styles.assistantButtonLabel}>Aktifleştir</Text>
-          </TouchableOpacity>
-        </View>
-
         <Text style={[styles.sectionTitle, { color: theme.text }]}>Yakın zamanda aradıkların</Text>
         <View style={styles.recentGrid}>
           {featuredListings.slice(0, 4).map((listing) => (

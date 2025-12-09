@@ -174,36 +174,6 @@ export const styles = StyleSheet.create({
     color: '#6b7280',
     marginTop: 4,
   },
-  assistantCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    backgroundColor: '#101d34',
-    borderRadius: 22,
-    padding: 20,
-  },
-  assistantTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#fff',
-  },
-  assistantDescription: {
-    fontSize: 13,
-    color: '#d1d5db',
-    marginTop: 6,
-    lineHeight: 18,
-  },
-  assistantButton: {
-    backgroundColor: '#ff565f',
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 14,
-  },
-  assistantButtonLabel: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 13,
-  },
   recentGrid: {
     gap: 12,
   },
