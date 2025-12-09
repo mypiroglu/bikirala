@@ -2,7 +2,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { featuredListings } from '@/constants/data';
@@ -18,12 +19,28 @@ export default function ListingDetailsScreen() {
   const params = useLocalSearchParams<{ id?: string }>();
   const cardBackground = colorScheme === 'dark' ? '#0b1f3a' : '#fff';
   const placeholderBackground = colorScheme === 'dark' ? '#101826' : '#eef2f7';
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
   const listing = React.useMemo(() => {
     const allListings = new Map(featuredListings.map((item) => [item.id, item]));
 
     return params.id ? allListings.get(params.id) : undefined;
   }, [params.id]);
+
+  React.useEffect(() => {
+    setIsFavorite(false);
+  }, [params.id]);
+
+  const toggleFavorite = () => {
+    if (!listing) return;
+
+    const nextFavorite = !isFavorite;
+    setIsFavorite(nextFavorite);
+    Haptics.selectionAsync();
+
+    const message = nextFavorite ? 'Favorilere eklendi' : 'Favorilerden kaldırıldı';
+    Alert.alert(message, `${listing.title} ${message.toLowerCase()}.`);
+  };
 
   const description =
     'Ürün detayları, teslimat bilgileri ve satıcıyla ilgili tüm bilgilere bu sayfadan ulaşabilirsin. Güvenli ödeme ile satın al, teslim alırken kontrol et.';
@@ -146,8 +163,31 @@ export default function ListingDetailsScreen() {
         <TouchableOpacity style={[styles.primaryButton, { backgroundColor: theme.tint }]}>
           <Text style={styles.primaryButtonLabel}>Hemen kirala</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.secondaryButton, { borderColor: theme.tabIconDefault }]}>
-          <Text style={[styles.secondaryButtonLabel, { color: theme.text }]}>Favorilere ekle</Text>
+        <TouchableOpacity
+          style={[
+            styles.secondaryButton,
+            {
+              borderColor: isFavorite ? theme.tint : theme.tabIconDefault,
+              backgroundColor: isFavorite
+                ? colorScheme === 'dark'
+                  ? 'rgba(255, 200, 87, 0.08)'
+                  : 'rgba(255, 86, 95, 0.08)'
+                : 'transparent',
+            },
+          ]}
+          activeOpacity={listing ? 0.88 : 1}
+          onPress={toggleFavorite}
+          disabled={!listing}>
+          <View style={styles.favoriteButtonContent}>
+            <MaterialCommunityIcons
+              name={isFavorite ? 'heart' : 'heart-outline'}
+              size={20}
+              color={isFavorite ? theme.tint : theme.text}
+            />
+            <Text style={[styles.secondaryButtonLabel, { color: theme.text }]}>
+              {isFavorite ? 'Favorilerinde' : 'Favorilere ekle'}
+            </Text>
+          </View>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
