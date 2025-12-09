@@ -18,6 +18,16 @@ export default function SearchScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const searchResults = React.useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return [];
+
+    return featuredListings.filter((listing) =>
+      `${listing.title} ${listing.location}`.toLowerCase().includes(query),
+    );
+  }, [searchQuery]);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
@@ -33,11 +43,53 @@ export default function SearchScreen() {
             placeholder="Ürün, kategori veya marka ara"
             placeholderTextColor="#8b94a1"
             style={styles.searchInput}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            autoCapitalize="none"
+            returnKeyType="search"
           />
-          <TouchableOpacity style={styles.scanButton}>
-            <MaterialCommunityIcons name="qrcode-scan" size={20} color={theme.background} />
-          </TouchableOpacity>
         </View>
+
+        {searchQuery.trim().length > 0 && (
+          <>
+            <View style={styles.resultsHeader}>
+              <Text style={[styles.sectionTitle, { color: theme.text }]}>Arama Sonuçları</Text>
+              <Text style={[styles.resultsCount, { color: theme.tint }]}>
+                {searchResults.length} sonuç
+              </Text>
+            </View>
+
+            {searchResults.length === 0 ? (
+              <View style={styles.emptyState}>
+                <MaterialCommunityIcons name="text-search" size={22} color={theme.tabIconDefault} />
+                <Text style={[styles.emptyStateTitle, { color: theme.text }]}>Sonuç bulunamadı</Text>
+                <Text style={styles.emptyStateHint}>
+                  Aramanı farklı anahtar kelimelerle veya kategori adıyla yeniden dene.
+                </Text>
+              </View>
+            ) : (
+              <View style={styles.resultsGrid}>
+                {searchResults.map((listing) => (
+                  <TouchableOpacity
+                    key={listing.id}
+                    activeOpacity={0.85}
+                    style={styles.resultCard}
+                    onPress={() => router.push({ pathname: '/listing/[id]', params: { id: listing.id } })}>
+                    <View style={styles.resultInfo}>
+                      <Text style={styles.resultTitle} numberOfLines={2}>
+                        {listing.title}
+                      </Text>
+                      <Text style={styles.resultMeta} numberOfLines={1}>
+                        {listing.location} · {listing.price}
+                      </Text>
+                    </View>
+                    <MaterialCommunityIcons name="chevron-right" size={18} color={theme.icon} />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </>
+        )}
 
         <Text style={[styles.sectionTitle, { color: theme.text }]}>Kaydedilen aramalar</Text>
         <View style={styles.savedContainer}>
